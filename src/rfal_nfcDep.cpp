@@ -1629,7 +1629,7 @@ ReturnCode RfalNfcClass::rfalNfcDepATR(const rfalNfcDepAtrParam *param, rfalNfcD
   cfg.nad  = param->NAD;
   cfg.fwt  = RFAL_NFCDEP_MAX_FWT;
   cfg.dFwt = RFAL_NFCDEP_MAX_FWT;
-  cfg.br   = param->BR;
+  cfg.br   = param->BitRate;
   cfg.bs   = param->BS;
   cfg.lr   = param->LR;
   cfg.to   = RFAL_NFCDEP_WT_TRG_MAX;            /* Not used in Initiator mode */
