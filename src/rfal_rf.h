@@ -558,6 +558,7 @@ typedef struct {
   struct {
     bool             enabled;    /*!< Inductive Amplitude measurement enabled                   */
     uint8_t          delta;      /*!< Delta between the reference and measurement to wake-up    */
+    uint8_t          fracDelta;  /*!< Fractional part of the delta [0;3] 0.25 steps (SW TD only) */
     uint8_t          reference;  /*!< Reference to be used;RFAL_WUM_REFERENCE_AUTO sets it auto */
     bool             autoAvg;    /*!< Use the HW Auto Averaging feature                         */
     bool             aaInclMeas; /*!< When AutoAvg is enabled, include IRQ measurement          */
@@ -566,6 +567,7 @@ typedef struct {
   struct {
     bool             enabled;    /*!< Inductive Phase measurement enabled                       */
     uint8_t          delta;      /*!< Delta between the reference and measurement to wake-up    */
+    uint8_t          fracDelta;  /*!< Fractional part of the delta [0;3] 0.25 steps (SW TD only) */
     uint8_t          reference;  /*!< Reference to be used;RFAL_WUM_REFERENCE_AUTO sets it auto */
     bool             autoAvg;    /*!< Use the HW Auto Averaging feature                         */
     bool             aaInclMeas; /*!< When AutoAvg is enabled, include IRQ measurement          */
