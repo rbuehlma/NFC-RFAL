@@ -61,7 +61,7 @@ typedef uint16_t      ReturnCode; /*!< Standard Return Code type from function. 
 #define ERR_NOMEM                          ((ReturnCode)1U)  /*!< not enough memory to perform the requested operation */
 #define ERR_BUSY                           ((ReturnCode)2U)  /*!< device or resource busy */
 #define ERR_IO                             ((ReturnCode)3U)  /*!< generic IO error */
-#define ERR_TIMEOUT                        ((ReturnCode)4U)  /*!< error due to timeout */
+#define ERR_TIMEOUT_ST                     ((ReturnCode)4U)  /*!< error due to timeout */
 #define ERR_REQUEST                        ((ReturnCode)5U)  /*!< invalid request or requested function can't be executed at the moment */
 #define ERR_NOMSG                          ((ReturnCode)6U)  /*!< No message of desired type */
 #define ERR_PARAM                          ((ReturnCode)7U)  /*!< Parameter error */

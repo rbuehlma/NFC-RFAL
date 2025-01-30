@@ -274,7 +274,7 @@ ReturnCode RfalNfcClass::rfalNfcvPollerCollisionResolution(rfalComplianceMode co
     /* Send INVENTORY_REQ with one slot   Activity 2.0  9.3.7.1  (Symbol 0)  */
     ret = rfalNfcvPollerInventory(RFAL_NFCV_NUM_SLOTS_1, 0, NULL, &nfcvDevList->InvRes, NULL);
 
-    if (ret == ERR_TIMEOUT) { /* Exit if no device found     Activity 2.0  9.3.7.2 (Symbol 1)  */
+    if (ret == ERR_TIMEOUT_ST) { /* Exit if no device found     Activity 2.0  9.3.7.2 (Symbol 1)  */
       return ERR_NONE;
     }
     if (ret == ERR_NONE) {    /* Device found without transmission error/collision    Activity 2.0  9.3.7.3 (Symbol 2)  */
@@ -319,7 +319,7 @@ ReturnCode RfalNfcClass::rfalNfcvPollerCollisionResolution(rfalComplianceMode co
       slotNum++;
 
       /*******************************************************************************/
-      if (ret != ERR_TIMEOUT) {
+      if (ret != ERR_TIMEOUT_ST) {
         if (rcvdLen < rfalConvBytesToBits(RFAL_NFCV_INV_RES_LEN + RFAL_NFCV_CRC_LEN)) {
           /* If only a partial frame was received make sure the FDT_V_INVENT_NORES is fulfilled */
           delay(RFAL_NFCV_FDT_V_INVENT_NORES);
@@ -414,7 +414,7 @@ ReturnCode RfalNfcClass::rfalNfcvPollerSleep(uint8_t flags, const uint8_t *uid)
 
   /* NFC Forum device SHALL wait at least FDTVpp to consider the SLPV acknowledged (FDTVpp = FDTVpoll)  Digital 2.0 (Candidate)  9.7  9.8.2  */
   ret = rfalRfDev->rfalTransceiveBlockingTxRx((uint8_t *)&slpReq, sizeof(rfalNfcvSlpvReq), &rxBuf, sizeof(rxBuf), NULL, RFAL_TXRX_FLAGS_DEFAULT, RFAL_FDT_POLL_NFCV_POLLER);
-  if (ret != ERR_TIMEOUT) {
+  if (ret != ERR_TIMEOUT_ST) {
     return ret;
   }
 

@@ -207,7 +207,7 @@ ReturnCode RfalNfcClass::rfalT2TPollerSectorSelect(uint8_t sectorNum)
   }
 
   /* T2T 1.0 5.4.1.13 The Reader/Writer SHALL treat the transmission of the SECTOR SELECT Command Packet 2 as being successful when it receives no response until PATT2T,SL,MAX. */
-  if (ret == ERR_TIMEOUT) {
+  if (ret == ERR_TIMEOUT_ST) {
     return ERR_NONE;
   }
 

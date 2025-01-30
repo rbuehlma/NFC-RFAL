@@ -457,7 +457,7 @@ ReturnCode RfalNfcClass::rfalSt25tbPollerWriteBlock(uint8_t blockAddress, const 
     return ERR_PROTO;
   }
   /* Check there was any error besides Timeout*/
-  if (ret != ERR_TIMEOUT) {
+  if (ret != ERR_TIMEOUT_ST) {
     return ret;
   }
 

@@ -392,7 +392,7 @@ ReturnCode RfalNfcClass::isoDepHandleControlMsg(rfalIsoDepControlMsg controlMsg,
     /*******************************************************************************/
     case ISODEP_R_NAK:
       if (gIsoDep.cntRRetrys++ > gIsoDep.maxRetriesR) {
-        return ERR_TIMEOUT;
+        return ERR_TIMEOUT_ST;
       }
 
       pcb = isoDep_PCBRNAK(gIsoDep.blockNumber);
@@ -558,7 +558,7 @@ ReturnCode RfalNfcClass::isoDepDataExchangePCD(uint16_t *outActRxLen, bool *outI
       ret = rfalRfDev->rfalGetTransceiveStatus();
       switch (ret) {
         /* Data rcvd with error or timeout -> Send R-NAK */
-        case ERR_TIMEOUT:
+        case ERR_TIMEOUT_ST:
         case ERR_CRC:
         case ERR_PAR:
         case ERR_FRAMING:          /* added to handle test cases scenario TC_POL_NFCB_T4AT_BI_82_x_y & TC_POL_NFCB_T4BT_BI_82_x_y */
@@ -782,7 +782,7 @@ ReturnCode RfalNfcClass::rfalIsoDepDeselect(void)
   } while (((cntRerun--) != 0U) && (ret == ERR_BUSY));
 
   rfalIsoDepInitialize();
-  return ((cntRerun == 0U) ? ERR_TIMEOUT : ret);
+  return ((cntRerun == 0U) ? ERR_TIMEOUT_ST : ret);
 }
 
 
@@ -1045,7 +1045,7 @@ ReturnCode RfalNfcClass::rfalIsoDepPollAHandleActivation(rfalIsoDepFSxI FSDI, ui
     ret = rfalIsoDepRATS(FSDI, DID, &isoDepDev->activation.A.Listener.ATS, &isoDepDev->activation.A.Listener.ATSLen);
 
     /* EMVCo 2.6  9.6.1.1 & 9.6.1.2  If a timeout error is detected retransmit, on transmission error abort */
-    if ((gIsoDep.compMode == RFAL_COMPLIANCE_MODE_EMV) && (ret != ERR_NONE) && (ret != ERR_TIMEOUT)) {
+    if ((gIsoDep.compMode == RFAL_COMPLIANCE_MODE_EMV) && (ret != ERR_NONE) && (ret != ERR_TIMEOUT_ST)) {
       break;
     }
 

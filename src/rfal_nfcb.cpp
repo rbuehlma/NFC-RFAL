@@ -336,7 +336,7 @@ ReturnCode RfalNfcClass::rfalNfcbPollerSlottedCollisionResolution(rfalCompliance
         }
 
         /* Activity 1.1  9.3.5.7 and 9.3.5.8  -  Symbol 6 */
-        if (ret != ERR_TIMEOUT) {
+        if (ret != ERR_TIMEOUT_ST) {
           /* Activity 1.1  9.3.5.8  -  Symbol 7 */
           if ((rfalNfcbCheckSensbRes(&nfcbDevList[*devCnt].sensbRes, nfcbDevList[*devCnt].sensbResLen) == ERR_NONE) && (ret == ERR_NONE)) {
             nfcbDevList[*devCnt].isSleep = false;

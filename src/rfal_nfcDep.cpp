@@ -361,7 +361,7 @@ ReturnCode RfalNfcClass::nfcipInitiatorHandleDEP(ReturnCode rxRes, uint16_t rxLe
   switch (rxRes) {
     /*******************************************************************************/
     /* Timeout ->  Digital 1.0 14.15.5.6 */
-    case ERR_TIMEOUT:
+    case ERR_TIMEOUT_ST:
 
       nfcipLogI(" NFCIP(I) TIMEOUT  TORetrys:%d \r\n", gNfcip.cntTORetrys);
 
@@ -379,7 +379,7 @@ ReturnCode RfalNfcClass::nfcipInitiatorHandleDEP(ReturnCode rxRes, uint16_t rxLe
       /*******************************************************************************/
       if (nfcipIsDeactivationPending()) {
         nfcipLogI(" skipping error recovery due deactivation pending \r\n");
-        return ERR_TIMEOUT;
+        return ERR_TIMEOUT_ST;
       }
 
       /* Digital 1.0 14.15.5.6 1)  If last PDU was NACK */
@@ -691,7 +691,7 @@ ReturnCode RfalNfcClass::nfcipTargetHandleRX(ReturnCode rxRes, uint16_t *outActR
     case ERR_BUSY:
       return ERR_BUSY;  /* Debug purposes */
 
-    case ERR_TIMEOUT:
+    case ERR_TIMEOUT_ST:
     case ERR_CRC:
     case ERR_PAR:
     case ERR_FRAMING:
@@ -1284,7 +1284,7 @@ ReturnCode RfalNfcClass::nfcipRun(uint16_t *outActRxLen, bool *outIsChaining)
         /* We should re-Enable Rx, and measure time between our field Off to
          * either report link loss or recover               #287          */
         nfcipLogI(" NFCIP(T) RTOX not sent due to config, NOT reenabling Rx \r\n");
-        return ERR_TIMEOUT;
+        return ERR_TIMEOUT_ST;
       }
 
       if (gNfcip.cntRTOXRetrys++ > NFCIP_MAX_RTOX_RETRYS) {             /* Check maximum consecutive RTOX requests */

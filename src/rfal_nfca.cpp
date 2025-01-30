@@ -109,7 +109,7 @@ enum {
           if (((rt)!=0U) && ((dl)!=0U)) {                \
             delay(dl);                         \
           }                                              \
-        } while( ((rts--) != 0U) && ((r)==ERR_TIMEOUT) );  \
+        } while( ((rts--) != 0U) && ((r)==ERR_TIMEOUT_ST) );  \
       }
 
 /*
@@ -249,7 +249,7 @@ ReturnCode RfalNfcClass::rfalNfcaPollerSingleCollisionResolution(uint8_t devLimi
 
       bytesRx = rfalConvBitsToBytes(bytesRx);
 
-      if ((ret == ERR_TIMEOUT)
+      if ((ret == ERR_TIMEOUT_ST)
           && (backtrackCnt != 0U) && !doBacktrack
           && !((RFAL_NFCA_SDD_REQ_LEN == bytesTxRx) && (0U == bitsTxRx))) {
         /* In multiple card scenarios it may always happen that some
@@ -453,7 +453,7 @@ ReturnCode RfalNfcClass::rfalNfcaPollerFullCollisionResolution(rfalComplianceMod
 
       /* Send a new SENS_REQ to check for other cards  Activity 1.1  9.3.4.23 */
       ret = rfalNfcaPollerCheckPresence(RFAL_14443A_SHORTFRAME_CMD_REQA, &nfcaDevList[*devCnt].sensRes);
-      if (ret == ERR_TIMEOUT) {
+      if (ret == ERR_TIMEOUT_ST) {
         /* No more devices found, exit */
         collPending = false;
       } else {
